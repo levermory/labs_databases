@@ -1,0 +1,19 @@
+﻿<Window x:Class="LR8_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LR8_3"
+        mc:Ignorable="d"
+        Title="MainWindow" Width="723.5" Loaded="Window_Loaded" Height="353.5">
+    <Grid>
+        <Button Content="New Game" HorizontalAlignment="Left" Margin="596,33,0,0" VerticalAlignment="Top" Width="75" Click="newGame"/>
+        <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="Auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="440" PreviewKeyDown="infoGrid_KeyDown" CellEditEnding="infoGrid_CellEditEnding" />
+        <Button x:Name="teamsButton" Content="View Teams" HorizontalAlignment="Left" Margin="476,33,0,0" VerticalAlignment="Top" Width="75" Click="showTeams"/>
+        <Button x:Name="playersButton" Content="View Players" HorizontalAlignment="Left" Margin="476,76,0,0" VerticalAlignment="Top" Width="75" Click="showPlayers"/>
+        <Button x:Name="DeleteRow" Content="Delete" HorizontalAlignment="Left" Margin="476,117,0,0" VerticalAlignment="Top" Width="75" Click="deleteRow"/>
+        <Button Content="Cross Query" HorizontalAlignment="Left" Margin="596,76,0,0" VerticalAlignment="Top" Width="75" Click="crossQuery"/>
+        <Button Content="Chemp" HorizontalAlignment="Left" Margin="596,117,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+    </Grid>
+</Window>

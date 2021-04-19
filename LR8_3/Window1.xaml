@@ -1,0 +1,17 @@
+﻿<Window x:Name="newGame" x:Class="LR8_3.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LR8_3"
+        mc:Ignorable="d"
+        Title="New Game" Height="331.5" Width="614">
+    <Grid>
+        <TextBox x:Name="winner" HorizontalAlignment="Left" Height="23" Margin="69,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Foreground="#FFBBBBBB" Text="1"/>
+        <TextBox x:Name="looser" HorizontalAlignment="Left" Height="23" Margin="180,155,0,0" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="100" Foreground="#FFBBBBBB"/>
+        <TextBox x:Name="place" HorizontalAlignment="Left" Height="23" Margin="296,155,0,0" TextWrapping="Wrap" Text="Minsk" VerticalAlignment="Top" Width="120" Foreground="#FFBBBBBB"/>
+        <TextBox x:Name="date" HorizontalAlignment="Left" Height="23" Margin="426,155,0,0" TextWrapping="Wrap" Text="2015-02-01" VerticalAlignment="Top" Width="120" Foreground="#FFBBBBBB"/>
+        <Button x:Name="Submit" Content="Submit" HorizontalAlignment="Left" Margin="252,213,0,0" VerticalAlignment="Top" Width="76" Click="submit"/>
+
+    </Grid>
+</Window>
