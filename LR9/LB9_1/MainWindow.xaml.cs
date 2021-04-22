@@ -169,21 +169,20 @@ namespace LB9_1
                 newRow.SetField("Price", x.totalPrice);
             }
             resultGrid.ItemsSource = result.DefaultView;
-
-
         }
 
         private void infoGrid_CellEditEnding(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
         {
             using (StreamWriter file = File.AppendText(@"log.txt"))
             {
-                if((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != null)
+                
+                if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
                 {
                     file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) edited");
                 }
                 else
                 {
-                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) created");
+                    file.WriteLine($"({DateTime.Now}) new row created");
                 }   
             }
             
