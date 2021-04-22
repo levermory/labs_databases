@@ -44,7 +44,7 @@ namespace WpfApp1
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             
-            Console.WriteLine("hello world");
+            //Console.WriteLine("hello world");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,9 +56,7 @@ namespace WpfApp1
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            da.OpenConnection(connString);
-            var Matches = da.GetMatches();
-            
+            da.OpenConnection(connString);           
             infoGrid.ItemsSource = da.GetMatches().DefaultView;
             da.CloseConnection();
 
@@ -68,7 +66,30 @@ namespace WpfApp1
         {
             if (infoGrid.SelectedItem != null)
             {
-                MessageBox.Show(e.EditingElement.DataContext.ToString());
+                if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
+                {
+                    string newData = ((TextBox)e.EditingElement).Text;
+                    string col = infoGrid.CurrentCell.Column.Header.ToString();
+                    string id = (infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString();
+                    da.OpenConnection(connString);
+                    da.UpdateTable(id, col, newData);
+                    da.CloseConnection();
+                }
+                else
+                {
+                    try
+                    {
+                        string newID = ((TextBox)e.EditingElement).Text;
+                        da.OpenConnection(connString);
+                        da.CreateUser(newID);
+                        da.CloseConnection();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                
             }
         }
 
@@ -78,6 +99,7 @@ namespace WpfApp1
             {
                 da.OpenConnection(connString);
                 da.DeleteRow((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString());
+                infoGrid.ItemsSource = da.GetUsers().DefaultView;
                 da.CloseConnection();
             }
         }

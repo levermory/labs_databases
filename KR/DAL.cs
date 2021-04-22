@@ -53,7 +53,17 @@ namespace WpfApp1
             query.ExecuteNonQuery();
             
         }
-        
+        public void UpdateTable(string id, string col, string new_data)
+        {
+            MySqlCommand query = new MySqlCommand($"update `user` set {col}='{new_data}' where id={id}", connection);
+            query.ExecuteNonQuery();
+        }
+        public void CreateUser(string id)
+        {
+            MySqlCommand query = new MySqlCommand($"insert into `user` (id) value ({id})", connection);
+            query.ExecuteNonQuery();
+        }
+
     }
     class User
     {
