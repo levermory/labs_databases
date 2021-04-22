@@ -3,3 +3,4 @@
 **/packages/*
 **/Properties/*
 .vs/
+.DS_Store
