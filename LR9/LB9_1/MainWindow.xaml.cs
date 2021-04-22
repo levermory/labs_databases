@@ -175,21 +175,27 @@ namespace LB9_1
 
         private void infoGrid_CellEditEnding(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
         {
-
-            using (StreamWriter file = File.AppendText(@"C:\Users\Лев\Desktop\log.txt"))
+            using (StreamWriter file = File.AppendText(@"log.txt"))
             {
-                file.WriteLine($"({DateTime.Now}) row edit");
+                if((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != null)
+                {
+                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) edited");
+                }
+                else
+                {
+                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) created");
+                }   
             }
-                
+            
         }
 
         private void infoGrid_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if(infoGrid.SelectedItems != null && e.Key == System.Windows.Input.Key.Delete)
             {
-                using (StreamWriter file = File.AppendText(@"C:\Users\Лев\Desktop\log.txt"))
+                using (StreamWriter file = File.AppendText(@"log.txt"))
                 {
-                    file.WriteLine($"({DateTime.Now}) row delete");
+                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) delete");
                 }
             }
         }
