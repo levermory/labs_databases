@@ -36,6 +36,7 @@ namespace WpfApp1
     {
         DAL da = new DAL();
         string connString = "server=localhost;uid=root;pwd=12345;database=tinder";
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -43,8 +44,7 @@ namespace WpfApp1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
-            //Console.WriteLine("hello world");
+            Console.WriteLine("window loaded");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -66,30 +66,29 @@ namespace WpfApp1
         {
             if (infoGrid.SelectedItem != null)
             {
-                if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
+                try
                 {
-                    string newData = ((TextBox)e.EditingElement).Text;
-                    string col = infoGrid.CurrentCell.Column.Header.ToString();
-                    string id = (infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString();
-                    da.OpenConnection(connString);
-                    da.UpdateTable(id, col, newData);
-                    da.CloseConnection();
-                }
-                else
-                {
-                    try
+                    if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
+                    {
+                        string newData = ((TextBox)e.EditingElement).Text;
+                        string col = infoGrid.CurrentCell.Column.Header.ToString();
+                        string id = (infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString();
+                        da.OpenConnection(connString);
+                        da.UpdateTable(id, col, newData);
+                        da.CloseConnection();
+                    }
+                    else
                     {
                         string newID = ((TextBox)e.EditingElement).Text;
                         da.OpenConnection(connString);
                         da.CreateUser(newID);
                         da.CloseConnection();
                     }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
                 }
-                
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -101,6 +100,20 @@ namespace WpfApp1
                 da.DeleteRow((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString());
                 infoGrid.ItemsSource = da.GetUsers().DefaultView;
                 da.CloseConnection();
+            }
+            else if(e.Key == Key.LeftCtrl)
+            {
+                Console.WriteLine("hello world");
+                //List<User> list = new List<User>();
+                //Console.Write("ID: ");
+                //string newID = Console.ReadLine();
+                //Console.Write("Name: ");
+                //string newName = Console.ReadLine();
+                //Console.Write("Age: ");
+                //string newAge = Console.ReadLine();
+                //Console.Write("Sex: ");
+                //string newSex = Console.ReadLine();
+                //list.Add(new User(Convert.ToInt16(newID), (string)newName, Convert.ToInt16(newAge), (string)newSex));
             }
         }
     }
