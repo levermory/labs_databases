@@ -4,3 +4,5 @@
 **/Properties/*
 .vs/
 .DS_Store
+.vscode
+.idea
