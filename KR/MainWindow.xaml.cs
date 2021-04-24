@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using System.IO;
 
 
 //Сайт знакомств
@@ -21,7 +22,7 @@ using System.Data;
 //CRUD – интерфейс без кнопок. С автоматическим доставлением
 //изменений в БД, при изменении DATAgrid.
 
-//Реализуйте возможность ввода новой строки в List<> через консоль,
+//Реализуйте возможность ввода новой строки в List<> через file,
 //по нажатию комбинации клавиш Ctrl + 6. Предложите пользователю в консоли
 //доставить изменения в БД. Если ответ положительный - доставьте. 
 
@@ -36,6 +37,8 @@ namespace WpfApp1
     {
         DAL da = new DAL();
         string connString = "server=localhost;uid=root;pwd=12345;database=tinder";
+
+        List<User> newUsers = new List<User>();
         
         public MainWindow()
         {
@@ -101,19 +104,39 @@ namespace WpfApp1
                 infoGrid.ItemsSource = da.GetUsers().DefaultView;
                 da.CloseConnection();
             }
-            else if(e.Key == Key.LeftCtrl)
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var Rows = File.ReadAllLines(@"C:\Users\levermory\Desktop\labs_databases\KR\data.txt");
+            foreach(var row in Rows)
             {
-                Console.WriteLine("hello world");
-                //List<User> list = new List<User>();
-                //Console.Write("ID: ");
-                //string newID = Console.ReadLine();
-                //Console.Write("Name: ");
-                //string newName = Console.ReadLine();
-                //Console.Write("Age: ");
-                //string newAge = Console.ReadLine();
-                //Console.Write("Sex: ");
-                //string newSex = Console.ReadLine();
-                //list.Add(new User(Convert.ToInt16(newID), (string)newName, Convert.ToInt16(newAge), (string)newSex));
+                var data = row.Split(' ');
+                var newUser = new User(data);
+                newUsers.Add(newUser);
+            }
+            newDataGrid.ItemsSource = newUsers;
+        }
+
+        private void newDataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.LeftCtrl)
+            {
+                try
+                {
+                    foreach (var u in newUsers)
+                    {
+                        da.OpenConnection(connString);
+                        da.CreateUser(u);
+                        da.CloseConnection();
+                    }
+                    MessageBox.Show("addded to DB");
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
     }

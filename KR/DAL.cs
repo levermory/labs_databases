@@ -63,14 +63,19 @@ namespace WpfApp1
             MySqlCommand query = new MySqlCommand($"insert into `user` (id) value ({id})", connection);
             query.ExecuteNonQuery();
         }
+        public void CreateUser(User newUser)
+        {
+            MySqlCommand query = new MySqlCommand($"insert into `user` () values ('{newUser._id}','{newUser._name}','{newUser._age}','{newUser._sex}')", connection);
+            query.ExecuteNonQuery();
+        }
 
     }
     class User
     {
-        public int _id;
-        public string _name;
-        public int _age;
-        public string _sex;
+        public int _id { get; set; }
+        public string _name { get; set; }
+        public int _age { get; set; }
+        public string _sex { get; set; }
         public User(int id, string name, int age, string sex)
         {
             _id = id;
@@ -78,13 +83,20 @@ namespace WpfApp1
             _age = age;
             _sex = sex;
         }
+        public User(string[] row)
+        {
+            _id = int.Parse(row[0]);
+            _name = row[1];
+            _age = int.Parse(row[2]);
+            _sex = row[3];
+        }
 
     }
     class Match
     {
-        int _id;
-        int _us1_id;
-        int _us2_id;
+        int _id { get; set; }
+        int _us1_id { get; set; }
+        int _us2_id { get; set; }
         public Match(int id, int us1_id, int us2_id)
         {
             _id = id;

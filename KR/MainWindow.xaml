@@ -7,9 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="infoGrid" Margin="10,10,311,147" CellEditEnding="infoGrid_CellEditEnding" PreviewKeyDown="infoGrid_PreviewKeyDown"/>
+        <DataGrid x:Name="infoGrid" Margin="10,10,316,188" CellEditEnding="infoGrid_CellEditEnding" PreviewKeyDown="infoGrid_PreviewKeyDown"/>
         <Button Content="get users" HorizontalAlignment="Left" Margin="559,48,0,0" VerticalAlignment="Top" Click="Button_Click"/>
         <Button Content="get matches" HorizontalAlignment="Left" Margin="585,119,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="get from file" HorizontalAlignment="Left" Margin="559,236,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <DataGrid x:Name="newDataGrid" Margin="10,262,316,10" KeyDown="newDataGrid_KeyDown"/>
 
     </Grid>
 </Window>
