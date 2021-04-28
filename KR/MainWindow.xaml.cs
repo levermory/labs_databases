@@ -120,7 +120,7 @@ namespace WpfApp1
 
         private void newDataGrid_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.LeftCtrl)
+            if(Keyboard.IsKeyDown(Key.LeftCtrl) && Keyboard.IsKeyDown(Key.6))
             {
                 try
                 {
