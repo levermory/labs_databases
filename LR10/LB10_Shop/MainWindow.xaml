@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <RadioButton x:Name="radioButton" Content="prod_id" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
+        <RadioButton x:Name="radioButton1" Content="prod_name" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
+        <RadioButton x:Name="radioButton2" Content="prod_quantyty" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
     </Grid>
 </Window>
