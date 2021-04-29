@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LB10_Shop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <RadioButton x:Name="radioButton" Content="prod_id" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
-        <RadioButton x:Name="radioButton1" Content="prod_name" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
-        <RadioButton x:Name="radioButton2" Content="prod_quantyty" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1"/>
+        <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="184" Margin="0,0,0,0" VerticalAlignment="Top" Width="526" CellEditEnding="infoGrid_CellEditEnding" PreviewKeyDown="infoGrid_PreviewKeyDown"/>
+        <Button x:Name="testButton" Content="Button" HorizontalAlignment="Left" Margin="547,48,0,0" VerticalAlignment="Top" Width="74"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="569,335,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+        <RadioButton x:Name="radioButton" Content="id" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1" Margin="654,250,0,0"/>
+        <RadioButton x:Name="radioButton1" Content="name" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1" Margin="647,223,0,0"/>
+        <RadioButton x:Name="radioButton2" Content="quantity" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1" Margin="647,202,0,0"/>
+        <RadioButton x:Name="radioButton3" Content="price" HorizontalAlignment="Left"  VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1" Margin="656,268,0,0"/>
+        <Button Content="delete" HorizontalAlignment="Left" Margin="584,124,0,0" VerticalAlignment="Top" Click="deletebutton_Click"/>
+        <Button Content="cancel" HorizontalAlignment="Left" Margin="584,280,0,0" VerticalAlignment="Top" Click="cancelbutton_Click"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="701,92,0,0" VerticalAlignment="Top" Click="update_withLINQ_Click"/>
+        <DataGrid x:Name="resGrid" Margin="10,223,274,41"/>
     </Grid>
 </Window>

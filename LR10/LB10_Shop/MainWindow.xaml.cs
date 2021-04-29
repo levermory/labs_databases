@@ -5,13 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Data;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.IO;
+//using System.Windows.Data;
+//using System.Windows.Documents;
+//using System.Windows.Input;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
+//using System.Windows.Navigation;
+//using System.Windows.Shapes;
+
 
 namespace LB10_Shop
 {
@@ -47,29 +52,28 @@ namespace LB10_Shop
             productCommands = new MySqlCommandBuilder(productAdapter);
             custCommands = new MySqlCommandBuilder(custAdapter);
             purchCommands = new MySqlCommandBuilder(purchAdapter);
-            
-            //new options
-            shopDS.Tables["manufact"].PrimaryKey = new DataColumn[]{shopDS.Tables["manufact"].Columns["id"]};
-            shopDS.Tables["product"].PrimaryKey = new DataColumn[]{shopDS.Tables["product"].Columns["id"]};
-
-            shopDs.Tables["product"].Columns["prod_id"].AutoIncrement = true;
-            var lastId = (from m in shopDs.Tables["product"].AsEnumerable()
-                select m["prod_id"]).Max(); 
-            shopDs.Tables["product"].Columns["prod_id"].AutoIncrementSeed = (int)lastId + 1;
-            shopDs.Tables["product"].Columns["prod_id"].AutoIncrementStep = 1;
-
-            shopDs.Tables["manufact"].Columns["manuf_id"].AutoIncrement = true;
-            lastId = (from m in shopDs.Tables["manufact"].AsEnumerable()
-                select m["manuf_id"]).Max(); 
-            shopDs.Tables["manufact"].Columns["manuf_id"].AutoIncrementSeed = (int)lastId + 1;
-            shopDs.Tables["manufact"].Columns["manuf_id"].AutoIncrementStep = 1;
-            //end new options
-
 
             manufApadter.Fill(shopDS, "manufact");
             productAdapter.Fill(shopDS, "product");
             custAdapter.Fill(shopDS, "customer");
             purchAdapter.Fill(shopDS, "purchase");
+
+            //new options
+            shopDS.Tables["manufact"].PrimaryKey = new DataColumn[]{shopDS.Tables["manufact"].Columns["id"]};
+            shopDS.Tables["product"].PrimaryKey = new DataColumn[]{shopDS.Tables["product"].Columns["id"]};
+
+            shopDS.Tables["product"].Columns["id"].AutoIncrement = true;
+            var lastId = (from m in shopDS.Tables["product"].AsEnumerable()
+                select m["id"]).Max(); 
+            shopDS.Tables["product"].Columns["id"].AutoIncrementSeed = (int)lastId + 1;
+            shopDS.Tables["product"].Columns["id"].AutoIncrementStep = 1;
+
+            shopDS.Tables["manufact"].Columns["id"].AutoIncrement = true;
+            lastId = (from m in shopDS.Tables["manufact"].AsEnumerable()
+                select m["id"]).Max(); 
+            shopDS.Tables["manufact"].Columns["id"].AutoIncrementSeed = (int)lastId + 1;
+            shopDS.Tables["manufact"].Columns["id"].AutoIncrementStep = 1;
+            //end new options
 
             DataRelation manufToProduct = new DataRelation("manuf_id_ref", 
                 shopDS.Tables["manufact"].Columns["id"],
@@ -88,15 +92,21 @@ namespace LB10_Shop
            manufToProduct.ChildKeyConstraint.DeleteRule = Rule.Cascade;
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            infoGrid.ItemsSource = shopDS.Tables["manufact"].DefaultView;
+            resGrid.ItemsSource = shopDS.Tables["product"].DefaultView;
+        }
+
         private void showProperty(string colname)
         {
             string colproperty = "";
-            colproperty += "Name - > " + shopDs.Tables["product"].Columns[colname].ColumnName + "\n";
-            colproperty += "Type - > " + shopDs.Tables["product"].Columns[colname].DataType + "\n";
-            colproperty += "Allow NULL - > " + shopDs.Tables["product"].Columns[colname].AllowDBNull + "\n";
-            colproperty += "Autoincrement - > " + shopDs.Tables["product"].Columns[colname].AutoIncrement + "\n";
-            colproperty += "Unique - > " + shopDs.Tables["product"].Columns[colname].Unique + "\n";
-            colproperty += "Number of primary keys - >" + shopDs.Tables["product"].PrimaryKey.Length + "\n";
+            colproperty += "Name - > " + shopDS.Tables["product"].Columns[colname].ColumnName + "\n";
+            colproperty += "Type - > " + shopDS.Tables["product"].Columns[colname].DataType + "\n";
+            colproperty += "Allow NULL - > " + shopDS.Tables["product"].Columns[colname].AllowDBNull + "\n";
+            colproperty += "Autoincrement - > " + shopDS.Tables["product"].Columns[colname].AutoIncrement + "\n";
+            colproperty += "Unique - > " + shopDS.Tables["product"].Columns[colname].Unique + "\n";
+            colproperty += "Number of primary keys - >" + shopDS.Tables["product"].PrimaryKey.Length + "\n";
             MessageBox.Show(colproperty);
         }
 
@@ -110,7 +120,7 @@ namespace LB10_Shop
         {
             try
             {
-                (manufGrid.SelectedItems[0] as DataRowView).Row.Delete();
+                (infoGrid.SelectedItems[0] as DataRowView).Row.Delete();
             }
             catch (Exception ex)
             {
@@ -118,41 +128,85 @@ namespace LB10_Shop
             }
             finally
             {
-                manufGrid.SelectedItems.Clear();
+                infoGrid.SelectedItems.Clear();
             }
         }
 
         private void cancelbutton_Click(object sender, RoutedEventArgs e)
         {
-            shopDs.RejectChanges();
+            shopDS.RejectChanges();
         }
+
+        //private void update_withLINQ_Click(object sender, RoutedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        var prodId = (int)(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray[0];
+        //        (from p in shopDS.Tables["product"].AsEnumerable()
+        //            where p.Field<int>("prod_id") == prodId
+        //            select p)
+        //            .FirstOrDefault().SetField("prod_quantyty", updateBOX.Text);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        manufGrid.SelectedItems.Clear();
+        //    }
+        //}
 
         private void update_withLINQ_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var prodId = (int)(productGrid.SelectedItems[0] as DataRowView).Row.ItemArray[0];
-                (from p in shopDs.Tables["product"].AsEnumerable()
-                    where p.Field<int>("prod_id") == prodId
-                    select p)
-                    .FirstOrDefault().SetField("prod_quantyty", updateBOX.Text);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                manufGrid.SelectedItems.Clear();
-            }
+            (from p in shopDS.Tables["product"].AsEnumerable()
+             where p.Field<int>("quantity") > 19
+             select p)
+                .ToList<DataRow>().ForEach(row => { row["quantity"] = 15; });
+            resGrid.ItemsSource = shopDS.Tables["product"].DefaultView;
         }
 
-        // private void update_withLINQ_Click(object sender, RoutedEventArgs e)
-        // {
-        //     (from p in shopDs.Tables["product"].AsEnumerable()
-        //         where p.Field<int>("prod_quantyty") > 19
-        //         select p)
-        //         .ToList<DataRow>().ForEach(row => { row["prod_quantyty"] = 15; });
-        // }
+        private void infoGrid_CellEditEnding(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
+        {
+            using (StreamWriter file = File.AppendText(@"log.txt"))
+            {
+
+                if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
+                {
+                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) edited");
+                }
+                else
+                {
+                    file.WriteLine($"({DateTime.Now}) new row created");
+                }
+            }
+
+        }
+
+        private void infoGrid_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (infoGrid.SelectedItems != null && e.Key == System.Windows.Input.Key.Delete)
+            {
+                using (StreamWriter file = File.AppendText(@"log.txt"))
+                {
+                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) delete");
+                }
+            }
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                manufApadter.Update(shopDS, "manufact");
+                productAdapter.Update(shopDS, "product");
+                custAdapter.Update(shopDS, "customer");
+                purchAdapter.Update(shopDS, "customer");
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }
