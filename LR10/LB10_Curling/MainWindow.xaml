@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LB10_Curling"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="186" Margin="10,10,0,0" VerticalAlignment="Top" Width="484"/>
         <DataGrid x:Name="resGrid" HorizontalAlignment="Left" Height="188" Margin="10,201,0,0" VerticalAlignment="Top" Width="484"/>
