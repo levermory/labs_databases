@@ -37,7 +37,7 @@ namespace WpfApp1
         }
         public DataTable GetMatches()
         {
-            MySqlCommand query = new MySqlCommand("select name, name from `match`, `user` where `user`.id=`match`.us1_id and `user`.id=`match`.us2_id", connection);
+            MySqlCommand query = new MySqlCommand("select name as name1, name as nam2 from `match`, `user` where `user`.id=`match`.id1 and `user`.id=`match`.id2", connection);
 
             DataTable restable = new DataTable();
             using (MySqlDataReader dr = query.ExecuteReader())

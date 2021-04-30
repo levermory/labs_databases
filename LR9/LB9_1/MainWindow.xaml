@@ -9,7 +9,7 @@
     <Grid>
         <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="184" Margin="0,0,0,0" VerticalAlignment="Top" Width="526" CellEditEnding="infoGrid_CellEditEnding" PreviewKeyDown="infoGrid_PreviewKeyDown"/>
         <DataGrid x:Name="resultGrid" HorizontalAlignment="Left" Height="142" Margin="10,213,0,0" VerticalAlignment="Top" Width="526"/>
-        <Button x:Name="testButton" Content="Button" HorizontalAlignment="Left" Margin="547,48,0,0" VerticalAlignment="Top" Width="74" Click="testButton_Click"/>
+        <Button x:Name="testButton" Content="Button" HorizontalAlignment="Left" Margin="547,48,0,0" VerticalAlignment="Top" Width="74"/>
         <Button Content="update" HorizontalAlignment="Left" Margin="569,335,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
         <TextBox x:Name="a" HorizontalAlignment="Left" Height="23" Margin="564,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="0"/>
         <TextBox x:Name="b" HorizontalAlignment="Left" Height="23" Margin="630,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" Text="20"/>

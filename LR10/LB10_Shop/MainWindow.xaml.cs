@@ -208,5 +208,19 @@ namespace LB10_Shop
             }
 
         }
+        private void manufGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (manufGrid.SelectedItems.Count != 0)
+            {
+                try
+                {
+                    Console.WriteLine((manufGrid.SelectedItems[0] as DataRowView).Row.RowState.ToString());
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }
