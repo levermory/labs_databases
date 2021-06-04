@@ -8,7 +8,7 @@ create table manufact
     name    varchar(50),
     country varchar(20),
     phone   varchar(20),
-    address varchar(50)
+    adress varchar(50)
 );
 
 insert into manufact

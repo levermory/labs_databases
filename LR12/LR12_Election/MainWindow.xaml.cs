@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LR12_Election
 {
@@ -26,6 +30,7 @@ namespace LR12_Election
         public float Rating { get; set; }
         public ICollection<Confident> Confidents { get; set; }
         public ICollection<Promise> Promises { get; set; }
+        public virtual CandidateProfile Profile { get; set; }
         public Candidate()
         {
             Confidents = new List<Confident>();
@@ -135,8 +140,8 @@ namespace LR12_Election
                 prom2.Candidates.Add(c2);
                 db.Promises.AddRange(new List<Promise> { prom1, prom2 });
                 db.SaveChanges();
-                CandidateProfile prof1 = new CandidateProfile { Id = c1.Id, Age = 50, Description = "Current president" };
-                CandidateProfile prof2 = new CandidateProfile { Id = c2.Id, Age = 40, Description = "Legend" };
+                CandidateProfile prof1 = new CandidateProfile { Id = c1.Number, Age = 50, Description = "Current president" };
+                CandidateProfile prof2 = new CandidateProfile { Id = c2.Number, Age = 40, Description = "Legend" };
                 db.CandidateProfiles.AddRange(new List<CandidateProfile> { prof1, prof2 });
                 db.SaveChanges();
             }
@@ -160,7 +165,7 @@ namespace LR12_Election
 
         private void infoGrid_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void updateButton_Click(object sender, RoutedEventArgs e)
@@ -193,7 +198,7 @@ namespace LR12_Election
         private void getConfs_Click(object sender, RoutedEventArgs e)
         {
             var curCand = curCont.Candidates.Include(p => p.Confidents).ToList();
-            string result = ""; 
+            string result = "";
             foreach (var c in curCand)
             {
                 result += c.Name + " " + c.Surname + " \n" + "Confidents: "; foreach (var conf in c.Confidents)
@@ -209,8 +214,8 @@ namespace LR12_Election
         {
             using (ElectionContext db = new ElectionContext())
             {
-                
-                var result2 = db.Candidates.Join(db.Confidents, p => p.Id,
+
+                var result2 = db.Candidates.Join(db.Confidents, p => p.Number,
                 c => c.CandidateId, (p, c) => new
                 {
                     Name = c.FullName,
@@ -221,7 +226,8 @@ namespace LR12_Election
                 var result3 = db.Confidents.GroupBy(c => c.CandidateId).Select(g =>
               new { ID = g.FirstOrDefault().Id, AvgAge = g.Average(c => c.Age) }).Join(db.Candidates,
                 a => a.ID,
-                b => b.Id, (a, b) => new {
+                b => b.Number, (a, b) => new
+                {
                     Name = b.Name,
                     Surname = b.Surname,
                     Age = a.AvgAge

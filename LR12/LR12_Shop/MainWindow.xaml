@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:LR12_Shop"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Loaded="Window_Loaded">
+        <DataGrid x:Name="mainGrid" HorizontalAlignment="Left" Height="210" Margin="10,10,0,0" VerticalAlignment="Top" Width="439"/>
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="167" Margin="10,225,0,0" VerticalAlignment="Top" Width="439"/>
+
     </Grid>
 </Window>
