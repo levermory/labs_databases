@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Loaded="Window_Loaded">
-        <DataGrid x:Name="mainGrid" HorizontalAlignment="Left" Height="210" Margin="10,10,0,0" VerticalAlignment="Top" Width="439"/>
+        <DataGrid x:Name="mainGrid" HorizontalAlignment="Left" Height="210" Margin="10,10,0,0" VerticalAlignment="Top" Width="439" PreviewKeyDown="mainGrid_PreviewKeyDown"/>
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="167" Margin="10,225,0,0" VerticalAlignment="Top" Width="439"/>
+        <Button x:Name="updButton" Content="Update" HorizontalAlignment="Left" Margin="598,72,0,0" VerticalAlignment="Top" Width="75" Click="updButton_Click"/>
 
     </Grid>
 </Window>

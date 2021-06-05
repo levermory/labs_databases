@@ -8,7 +8,7 @@ create table manufact
     name    varchar(50),
     country varchar(20),
     phone   varchar(20),
-    address varchar(50)
+    adress varchar(50)
 );
 
 insert into manufact
@@ -58,10 +58,9 @@ create table purchase
     prod_id int,
     amount int,
     date datetime,
-    constraint cust_id_ref foreign key (cust_id) references customer(id) on delete cascade ,
-    constraint prod_if_ref foreign key (prod_id) references product(id) on delete cascade
+    constraint cust_id_ref foreign key (cust_id) references customer(id) on delete set null,
+    constraint prod_if_ref foreign key (prod_id) references product(id) on delete set null
 );
-
 INSERT INTO shop.purchase (cust_id, prod_id, amount, date)
 VALUES (1, 1, 3, '2021-04-14 22:43:13'),
        (1, 2, 5, '2021-04-14 22:43:16'),

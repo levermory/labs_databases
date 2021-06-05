@@ -89,7 +89,7 @@ namespace LB10_Shop
             shopDS.Relations.Add(custToPurch);
             shopDS.Relations.Add(prodToPurch);
 
-           manufToProduct.ChildKeyConstraint.DeleteRule = Rule.Cascade;
+           manufToProduct.ChildKeyConstraint.DeleteRule = Rule.SetNull;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -166,33 +166,8 @@ namespace LB10_Shop
             resGrid.ItemsSource = shopDS.Tables["product"].DefaultView;
         }
 
-        private void infoGrid_CellEditEnding(object sender, System.Windows.Controls.DataGridCellEditEndingEventArgs e)
-        {
-            using (StreamWriter file = File.AppendText(@"log.txt"))
-            {
-
-                if ((infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString() != "")
-                {
-                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) edited");
-                }
-                else
-                {
-                    file.WriteLine($"({DateTime.Now}) new row created");
-                }
-            }
-
-        }
-
-        private void infoGrid_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (infoGrid.SelectedItems != null && e.Key == System.Windows.Input.Key.Delete)
-            {
-                using (StreamWriter file = File.AppendText(@"log.txt"))
-                {
-                    file.WriteLine($"({DateTime.Now}) row({(infoGrid.SelectedItems[0] as DataRowView).Row.ItemArray.GetValue(0).ToString()}) delete");
-                }
-            }
-        }
+       
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -208,19 +183,6 @@ namespace LB10_Shop
             }
 
         }
-        private void manufGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (manufGrid.SelectedItems.Count != 0)
-            {
-                try
-                {
-                    Console.WriteLine((manufGrid.SelectedItems[0] as DataRowView).Row.RowState.ToString());
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
+        
     }
 }

@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="teamGrid" HorizontalAlignment="Left" Height="207" VerticalAlignment="Top" Width="466" Margin="10,10,0,0"/>
+        <DataGrid x:Name="teamGrid" HorizontalAlignment="Left" Height="147" VerticalAlignment="Top" Width="466" Margin="10,10,0,0"/>
         <Button x:Name="updateButton" Content="Update" HorizontalAlignment="Left" Margin="687,379,0,0" VerticalAlignment="Top" Width="75" Click="updateButton_Click"/>
         <Button x:Name="deleteTeam" Content="Delete Team" HorizontalAlignment="Left" Margin="509,35,0,0" VerticalAlignment="Top" Width="75" Click="deleteTeam_Click"/>
-        <Button x:Name="deletePlayer" Content="Delete Player" HorizontalAlignment="Left" Margin="509,236,0,0" VerticalAlignment="Top" Width="75"/>
-        <DataGrid x:Name="playerGrid" HorizontalAlignment="Left" Height="177" Margin="10,222,0,0" VerticalAlignment="Top" Width="466"/>
+        <Button x:Name="deletePlayer" Content="Delete Player" HorizontalAlignment="Left" Margin="481,210,0,0" VerticalAlignment="Top" Width="75" Click="deletePlayer_Click"/>
+        <DataGrid x:Name="playerGrid" HorizontalAlignment="Left" Height="126" Margin="10,162,0,0" VerticalAlignment="Top" Width="466"/>
+        <Button x:Name="linq1" Content="Linq1" HorizontalAlignment="Left" Margin="687,210,0,0" VerticalAlignment="Top" Width="75" Click="linq1_Click"/>
 
     </Grid>
 </Window>

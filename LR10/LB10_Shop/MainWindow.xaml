@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
-        <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="184" Margin="0,0,0,0" VerticalAlignment="Top" Width="526" CellEditEnding="infoGrid_CellEditEnding" PreviewKeyDown="infoGrid_PreviewKeyDown"/>
+        <DataGrid x:Name="infoGrid" HorizontalAlignment="Left" Height="184" Margin="0,0,0,0" VerticalAlignment="Top" Width="526"/>
         <Button x:Name="testButton" Content="Button" HorizontalAlignment="Left" Margin="547,48,0,0" VerticalAlignment="Top" Width="74"/>
         <Button Content="update" HorizontalAlignment="Left" Margin="569,335,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
         <RadioButton x:Name="radioButton" Content="id" HorizontalAlignment="Left" VerticalAlignment="Top" Checked="radioButton_Checked" GroupName="group1" Margin="654,250,0,0"/>

@@ -42,7 +42,7 @@ namespace LR11_Curling
         public int Weight { get; set; }
         public int Exp { get; set; }
         public int? TeamId { get; set; }
-        public Team Team;
+        public Team Team { get; set; }
         public Player()
         {
 
@@ -81,7 +81,6 @@ namespace LR11_Curling
                 var switzerland = new Team() { Country = "Switzerland", Points = 65196, Rating = 4 };
                 var schotland = new Team() { Country = "Schotland", Points = 52059, Rating = 5 };
                 db.Teams.AddRange(new List<Team>() { sweden, canada, usa, switzerland, schotland });
-                db.SaveChanges();
                 var nicklas = new Player() { Name = "Nicklas Edin", Age = 35, Team = sweden };
                 var oscar = new Player() { Name = "Oscar Ericsson", Age = 35, Team = sweden };
                 var john = new Player() { Name = "John Shooster", Age = 35, Team = sweden };
@@ -120,6 +119,7 @@ namespace LR11_Curling
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
             Curling.SaveChanges();
+            Window_Loaded(null, null);
         }
 
         private void deleteTeam_Click(object sender, RoutedEventArgs e)
@@ -127,8 +127,36 @@ namespace LR11_Curling
             if(teamGrid.SelectedItems != null)
             {
                 var toDelete = teamGrid.SelectedItems[0] as Team;
+                Curling.Entry(toDelete).Collection("Players").Load();
+                foreach (Player p in toDelete.Players.ToList())
+                {
+                    Curling.Players.Remove(p);
+                }
                 Curling.Teams.Remove(toDelete);
             }
+        }
+
+        private void deletePlayer_Click(object sender, RoutedEventArgs e)
+        {
+            if (playerGrid.SelectedItems != null)
+            {
+                var toDelete = playerGrid.SelectedItems[0] as Player;
+                Curling.Players.Remove(toDelete);
+            }
+        }
+
+        private void linq1_Click(object sender, RoutedEventArgs e)
+        {
+            var query = from player in Curling.Players.ToList()
+                        join team in Curling.Teams.ToList()
+                        on player.Team equals team
+                        group player by player.Team.Country into temp
+                        select new
+                        {
+                            Country = temp.Key,
+                            AvgAge = temp.Average(x => x.Age)
+                        };
+            playerGrid.ItemsSource = query;
         }
     }
 }

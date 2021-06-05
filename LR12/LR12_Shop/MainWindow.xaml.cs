@@ -26,7 +26,7 @@ namespace LR12_Shop
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     [Table("manufact")]
-    public class Manufacturer
+    class Manufacturer
     {
         [Key]
         public int id { get; set; }
@@ -44,7 +44,7 @@ namespace LR12_Shop
     }
     [Table("product")]
 
-    public class Product
+    class Product
     {
         [Key]
         public int id { get; set; }
@@ -55,6 +55,38 @@ namespace LR12_Shop
         [Column("manuf_id")]
         public int? manuf_id { get; set; }
         public virtual Manufacturer manuf { get; set; }
+        public ICollection<Purchase> purchases { get; set; }
+        public Product()
+        {
+            purchases = new List<Purchase>();
+        }
+    }
+    [Table("customer")]
+    class Customer
+    {
+        [Key]
+        public int id { get; set; }
+        public string name { get; set; }
+        public ICollection<Purchase> buys { get; set; }
+        public Customer()
+        {
+            buys = new List<Purchase>();
+        }
+    }
+    [Table("purchase")]
+    class Purchase
+    {
+        [Key]
+        public int id { get; set; }
+        [Column("cust_id")]
+        public int? cust_id { get; set; }
+        public virtual Customer cust { get; set; }
+        [Column("prod_id")]
+        public int? prod_id { get; set; }
+        public virtual Product prod { get; set; }
+        public int amount { get; set; }
+        public DateTime date { get; set; }
+
     }
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
@@ -69,6 +101,9 @@ namespace LR12_Shop
             modelBuilder.Entity<Manufacturer>()
             .HasMany(p => p.Products)
             .WithOptional(p => p.manuf).HasForeignKey(p => p.manuf_id);
+            modelBuilder.Entity<Customer>().HasMany(c => c.buys).WithRequired(p => p.cust).HasForeignKey(p => p.cust_id);
+            modelBuilder.Entity<Product>().HasMany(c => c.purchases).WithRequired(p => p.prod).HasForeignKey(p => p.prod_id);
+
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Manufacturer> Manufacturers { get; set; }
@@ -94,6 +129,24 @@ namespace LR12_Shop
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             curCont.Dispose();
+        }
+
+        private void mainGrid_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Delete)
+            {
+                if(mainGrid.SelectedItems != null)
+                {
+                    var toDelete = mainGrid.SelectedItems[0] as Manufacturer;
+                    curCont.Manufacturers.Remove(toDelete);
+                }
+            }
+        }
+
+        private void updButton_Click(object sender, RoutedEventArgs e)
+        {
+            curCont.SaveChanges();
+            Window_Loaded(null, null);
         }
     }
     
