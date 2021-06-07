@@ -171,6 +171,7 @@ namespace LR12_Election
         private void updateButton_Click(object sender, RoutedEventArgs e)
         {
             curCont.SaveChanges();
+            Window_Loaded(null, null);
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)

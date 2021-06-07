@@ -1,0 +1,33 @@
+[
+    {
+        "Name": "Chumur",
+        "Surname": "Turko",
+        "Age":19,
+        "Speciality":"KM",
+        "Marks": [1,2,3,4,5]
+    },
+    {
+        "Name":"Edgar",
+        "Surname": "Turko",
+        "Age":19,
+        "Speciality":"KM",
+        "Quotes": ["Sosi"]
+    },
+    {
+        "Name": "Nikita",
+        "Surname": "Korbovski",
+        "Speciality":"KM",
+        "Marks":[5,5,5,5,5],
+        "Quotes": ["Zalupinsk"]
+    },
+    {
+        "Name": "Jan",
+        "Surname": "Jasker",
+        "Speciality": "Web",
+        "Marks":[4,4,4,4,4]
+    },
+    {
+        "Name": "Sastya",
+        "Surname": "Turko"
+    }
+]

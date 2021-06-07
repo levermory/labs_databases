@@ -1,0 +1,60 @@
+[
+    {
+        "Age": 19,
+        "Marks": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "Name": "Chumur",
+        "Speciality": "KM",
+        "Surname": "Turko",
+        "_id": "60bbe65f90f14bd463d4d64a"
+    },
+    {
+        "Age": 19,
+        "Name": "Edgar",
+        "Quotes": [
+            "Sosi"
+        ],
+        "Speciality": "KM",
+        "Surname": "Turko",
+        "_id": "60bbe65f90f14bd463d4d64b"
+    },
+    {
+        "Marks": [
+            5,
+            5,
+            5,
+            5,
+            5
+        ],
+        "Name": "Nikita",
+        "Quotes": [
+            "Zalupinsk"
+        ],
+        "Speciality": "KM",
+        "Surname": "Korbovski",
+        "_id": "60bbe65f90f14bd463d4d64c"
+    },
+    {
+        "Marks": [
+            4,
+            4,
+            4,
+            4,
+            4
+        ],
+        "Name": "Jan",
+        "Speciality": "Web",
+        "Surname": "Jasker",
+        "_id": "60bbe65f90f14bd463d4d64d"
+    },
+    {
+        "Name": "Sastya",
+        "Surname": "Turko",
+        "_id": "60bbe65f90f14bd463d4d64e"
+    }
+]

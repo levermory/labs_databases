@@ -1,0 +1,72 @@
+[{
+	"_id": {
+		"$oid": "60bbdeba07afc9271714cf2d"
+	},
+	"Name": "Edgar",
+	"Surname": "Turko",
+	"Age": 19,
+	"Speciality": "KM",
+	"Quotes": [
+		"Sosi"
+	]
+},
+{
+	"_id": {
+		"$oid": "60bbdeba07afc9271714cf2e"
+	},
+	"Name": "Chumur",
+	"Surname": "Turko",
+	"Age": 19,
+	"Speciality": "KM",
+	"Marks": [
+		1,
+		2,
+		3,
+		4,
+		5
+	]
+},
+{
+	"_id": {
+		"$oid": "60bbdeba07afc9271714cf2f"
+	},
+	"Name": "Nikita",
+	"Surname": "Korbovski",
+	"Speciality": "KM",
+	"Marks": [
+		5,
+		5,
+		5,
+		5,
+		5
+	],
+	"Quotes": [
+		"Zalupinsk"
+	]
+},
+{
+	"_id": {
+		"$oid": "60bbdeba07afc9271714cf30"
+	},
+	"Name": "Sastya",
+	"Surname": "Turko",
+	"Quotes": [
+		"besish menya"
+	]
+},
+{
+	"_id": {
+		"$oid": "60bbdeba07afc9271714cf31"
+	},
+	"Name": "Jan",
+	"Surname": "Jasker",
+	"Speciality": "Web",
+	"Marks": [
+		4,
+		4,
+		4,
+		4,
+		4
+	]
+}]
+

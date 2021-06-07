@@ -1,0 +1,5 @@
+mongoimport --jsonArray --db students --collection students --drop --file students.json
+mongoexport --jsonArray --pretty --db students --collection students --out new_students.json
+
+mongoimport --jsonArray --db curling --collection players --drop --file players.json
+mongoimport --jsonArray --db shop --collection products --drop --file task2.json

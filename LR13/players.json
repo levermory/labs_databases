@@ -1,0 +1,54 @@
+[
+    {
+        "Name": "Nicklas Edin",
+        "Age": 35,
+        "Team": {
+            "Country": "Sweden",
+            "Points": 89020
+        }
+    },
+    {
+        "Name": "John Shooster",
+        "Age": 40,
+        "Team": {
+            "Country": "Sweden",
+            "Points": 89020
+        }
+    },
+    {
+        "Name": "Oscar Ericsson",
+        "Age": 30,
+        "Team": {
+            "Country": "Canada",
+            "Points": 75980
+        }
+
+    },
+    {
+        "Name": "Colton Flash",
+        "Age": 28,
+        "Team": {
+            "Country": "Canada",
+            "Points": 75980
+        }
+        
+    },
+    {
+        "Name": "Matt Hamilton",
+        "Age": 33,
+        "Team": {
+            "Country": "USA",
+            "Points": 7029
+        }
+        
+    },
+    {
+        "Name": "Bobby Lemmi",
+        "Age": 37,
+        "Team": {
+            "Country": "USA",
+            "Points": 7029
+        }
+        
+    }
+]
